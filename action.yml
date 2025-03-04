@@ -1,6 +1,9 @@
 ---
   name: '@phoenixtw/github-release'
   description: 'Releasing new version to github releases'
+  branding:
+    icon: anchor
+    color: black
   inputs:
     access_token:
       description: "GitHub Access Token"
