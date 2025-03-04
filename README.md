@@ -1,4 +1,4 @@
-# Publish GitHub Release
+# Github Release
 
 This action simply creates a GitHub release.
 
@@ -27,7 +27,7 @@ jobs:
       timeout-minutes: 15
       steps:        
         - name: Github release
-          uses: phoenixTW/github-release@master
+          uses: @phoenixtw/github-release@1.0
           with:
             access_token: ${{ secrets.GITHUB_TOKEN }}
             tag: v0.0.1
