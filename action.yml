@@ -1,0 +1,74 @@
+---
+  name: 'GitHub Release'
+  description: 'Releasing new version to github releases'
+  inputs:
+    access_token:
+      description: "GitHub Access Token"
+      required: true
+    tag:
+      description: "Tag that will be used for the GitHub Release"
+      required: true
+    tag_only:
+      description: "Create only git tags without github releases"
+      required: false
+      default: "false"
+    assets:
+      description: "Upload and attach assets to the release. Ignored when 'tag_only' is enabled."
+      required: false
+    draft:
+      description: >
+        Save the release as a draft instead of publishing it.
+        Only one of 'draft' and 'prerelease' can be set to true.
+        Ignored when 'tag_only' is enabled.
+      required: false
+      default: "false"
+    prerelease:
+      description: >
+        Mark the release as a prerelease.
+        Only one of 'draft' and 'prerelease' can be set to true.
+        Ignored when 'tag_only' is enabled.
+      required: false
+      default: "false"
+    notes:
+      description: >
+        Add notes to the release.
+        Only one of 'notes`, 'notes-file', and `generate-notes` can be used.
+        Ignored when 'tag_only' is enabled.
+      required: false
+    notes-file:
+      description: >
+        Add notes to the release from file.
+        Only one of 'notes', 'notes-file', and `generate-notes` can be used.
+        Ignored when 'tag_only' is enabled.
+      required: false
+    generate-notes:
+      description: >
+        Automatically generate notes for the release.
+        Only one of 'notes', 'notes-file', and `generate-notes` can be used.
+        Ignored when 'tag_only' is enabled.
+      required: false
+    notes-start-tag:
+      description: >
+        The tag to start generating release notes from.
+        Only used when 'generate-notes' is enabled.
+        Ignored when 'tag_only' is enabled.
+      required: false
+  runs:
+    using: "composite"
+    steps:
+      - id: github-release
+        shell: bash
+        env:
+          INPUT_ACCESS_TOKEN: "${{ inputs.access_token }}"
+          INPUT_TAG: "${{ inputs.tag }}"
+          INPUT_TAG_ONLY: "${{ inputs.tag_only }}"
+          INPUT_ASSETS: "${{ inputs.assets }}"
+          INPUT_DRAFT: "${{ inputs.draft }}"
+          INPUT_PRERELEASE: "${{ inputs.prerelease }}"
+          INPUT_NOTES: "${{ inputs.notes }}"
+          INPUT_NOTES_FILE: "${{ inputs.notes-file }}"
+          INPUT_GENERATE_NOTES: "${{ inputs.generate-notes }}"
+          INPUT_NOTES_START_TAG: "${{ inputs.notes-start-tag }}"
+        run: >
+          ${{ github.action_path }}/script.sh
+  
