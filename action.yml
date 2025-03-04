@@ -1,5 +1,5 @@
 ---
-  name: 'GitHub Release'
+  name: 'Publish GitHub Release'
   description: 'Releasing new version to github releases'
   inputs:
     access_token:
