@@ -1,4 +1,4 @@
-# GitHub Release
+# Publish GitHub Release
 
 This action simply creates a GitHub release.
 
